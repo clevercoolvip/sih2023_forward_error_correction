@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <title>Satellite FEC</title>
+    <style>
+        .body {
+            background: #E8CBC0;
+            background: -webkit-linear-gradient(to right, #636FA4, #E8CBC0);
+            background: linear-gradient(to right, #636FA4, #E8CBC0);
+        }
+
+        .btn {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 13rem;
+            overflow: hidden;
+            height: 3rem;
+            background-size: 300% 300%;
+            backdrop-filter: blur(1rem);
+            border-radius: 5rem;
+            transition: 0.5s;
+            animation: gradient_301 5s ease infinite;
+            border: double 4px transparent;
+            background-image: linear-gradient(#212121, #212121), linear-gradient(137.48deg, #ffdb3b 10%, #FE53BB 45%, #8F51EA 67%, #0044ff 87%);
+            background-origin: border-box;
+            background-clip: content-box, border-box;
+        }
+
+        #container-stars {
+            position: absolute;
+            z-index: -1;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            transition: 0.5s;
+            backdrop-filter: blur(1rem);
+            border-radius: 5rem;
+        }
+
+        strong {
+            z-index: 2;
+            font-family: 'Avalors Personal Use';
+            font-size: 12px;
+            letter-spacing: 5px;
+            color: #FFFFFF;
+            text-shadow: 0 0 4px white;
+        }
+
+        #glow {
+            position: absolute;
+            display: flex;
+            width: 12rem;
+        }
+
+        .circle {
+            width: 100%;
+            height: 30px;
+            filter: blur(2rem);
+            animation: pulse_3011 4s infinite;
+            z-index: -1;
+        }
+
+        .circle:nth-of-type(1) {
+            background: rgba(254, 83, 186, 0.636);
+        }
+
+        .circle:nth-of-type(2) {
+            background: rgba(142, 81, 234, 0.704);
+        }
+
+        .btn:hover #container-stars {
+            z-index: 1;
+            background-color: #212121;
+        }
+
+        .btn:hover {
+            transform: scale(1.1)
+        }
+
+        .btn:active {
+            border: double 4px #FE53BB;
+            background-origin: border-box;
+            background-clip: content-box, border-box;
+            animation: none;
+        }
+
+        .btn:active .circle {
+            background: #FE53BB;
+        }
+
+        #stars {
+            position: relative;
+            background: transparent;
+            width: 200rem;
+            height: 200rem;
+        }
+
+        #stars::after {
+            content: "";
+            position: absolute;
+            top: -10rem;
+            left: -100rem;
+            width: 100%;
+            height: 100%;
+            animation: animStarRotate 90s linear infinite;
+        }
+
+        #stars::after {
+            background-image: radial-gradient(#ffffff 1px, transparent 1%);
+            background-size: 50px 50px;
+        }
+
+        #stars::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -50%;
+            width: 170%;
+            height: 500%;
+            animation: animStar 60s linear infinite;
+        }
+
+        #stars::before {
+            background-image: radial-gradient(#ffffff 1px, transparent 1%);
+            background-size: 50px 50px;
+            opacity: 0.5;
+        }
+
+        @keyframes animStar {
+            from {
+                transform: translateY(0);
+            }
+
+            to {
+                transform: translateY(-135rem);
+            }
+        }
+
+        @keyframes animStarRotate {
+            from {
+                transform: rotate(360deg);
+            }
+
+            to {
+                transform: rotate(0);
+            }
+        }
+
+        @keyframes gradient_301 {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        @keyframes pulse_3011 {
+            0% {
+                transform: scale(0.75);
+                box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.7);
+            }
+
+            70% {
+                transform: scale(1);
+                box-shadow: 0 0 0 10px rgba(0, 0, 0, 0);
+            }
+
+            100% {
+                transform: scale(0.75);
+                box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+            }
+        }
+
+        .btn-17,
+        .btn-17 *,
+        .btn-17 :after,
+        .btn-17 :before,
+        .btn-17:after,
+        .btn-17:before {
+            border: 0 solid;
+            box-sizing: border-box;
+        }
+
+        .btn-17 {
+            -webkit-tap-highlight-color: transparent;
+            -webkit-appearance: button;
+            background-color: #000;
+            background-image: none;
+            color: #fff;
+            cursor: pointer;
+            font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+                Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif,
+                Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+            font-size: 100%;
+            font-weight: 900;
+            line-height: 1.5;
+            margin: 0;
+            -webkit-mask-image: -webkit-radial-gradient(#000, #fff);
+            padding: 0;
+            text-transform: uppercase;
+        }
+
+        .btn-17:disabled {
+            cursor: default;
+        }
+
+        .btn-17:-moz-focusring {
+            outline: auto;
+        }
+
+        .btn-17 svg {
+            display: block;
+            vertical-align: middle;
+        }
+
+        .btn-17 [hidden] {
+            display: none;
+        }
+
+        .btn-17 {
+            border-radius: 99rem;
+            border-width: 2px;
+            padding: 0.8rem 3rem;
+            z-index: 0;
+        }
+
+        .btn-17,
+        .btn-17 .text-container {
+            overflow: hidden;
+            position: relative;
+        }
+
+        .btn-17 .text-container {
+            display: block;
+            mix-blend-mode: difference;
+        }
+
+        .btn-17 .text {
+            display: block;
+            position: relative;
+        }
+
+        .btn-17:hover .text {
+            -webkit-animation: move-up-alternate 0.3s forwards;
+            animation: move-up-alternate 0.3s forwards;
+        }
+
+        @-webkit-keyframes move-up-alternate {
+            0% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(80%);
+            }
+
+            51% {
+                transform: translateY(-80%);
+            }
+
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes move-up-alternate {
+            0% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(80%);
+            }
+
+            51% {
+                transform: translateY(-80%);
+            }
+
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        .btn-17:after,
+        .btn-17:before {
+            --skew: 0.2;
+            background: #fff;
+            content: "";
+            display: block;
+            height: 102%;
+            left: calc(-50% - 50% * var(--skew));
+            pointer-events: none;
+            position: absolute;
+            top: -104%;
+            transform: skew(calc(150deg * var(--skew))) translateY(var(--progress, 0));
+            transition: transform 0.2s ease;
+            width: 100%;
+        }
+
+        .btn-17:after {
+            --progress: 0%;
+            left: calc(50% + 50% * var(--skew));
+            top: 102%;
+            z-index: -1;
+        }
+
+        .btn-17:hover:before {
+            --progress: 100%;
+        }
+
+        .btn-17:hover:after {
+            --progress: -102%;
+        }
+    </style>
+
+</head>
+
+<body class="bg-gray-100">
+    <header class="text-gray-600 body-font">
+        <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
+            <button class="btn-17 sm:px-5">
+                <span class="text-container ">
+                    <span class="text">FEC-eye</span>
+                </span>
+            </button>
+            <nav class="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center">
+            </nav>
+            <img class="h-16 w-16" src="/static/logo.png"/>
+        </div>
+    </header>
+    <div class="top-0 mt-5">
+        <div class="flex justify-center">
+            <h1 class="text-black text-4xl font-bold pb-1">ENABLING NEXT-GENERATION SIGNAL ANALYSIS</h1>
+        </div>
+        <div class="flex justify-center">
+            <h1 class="bg-gradient-to-r px-2 py-2 from-indigo-500 via-purple-500 to-pink-500 text-transparent bg-clip-text text-4xl font-bold pb-2 pb-5">Accurate and efficient</h1>
+
+        </div>
+        <div class="flex justify-center">
+            <!-- <h1 class="text-3xl font-bold bg-gradient-to-r px-2 py-2 from-indigo-500 via-purple-500 to-pink-500 text-transparent bg-clip-text">Our Solution</h1> -->
+        </div>
+        <div class="flex justify-center">
+            <p class="px-80 text-black text-2xl font-bold text-center ">Demodulated data can be a cryptic puzzle. Our solution expertly identifies the underlying FEC scheme, ensuring clean and reliable data everytime.</p>
+        </div>
+    </div>
+    <div class="justify-center mr-16 flex">
+        <img src="static\sat.svg" alt="">
+    </div>
+    <div class="flex justify-center ">
+
+        <a href="/process">
+            <button class="btn" type="button">
+                <strong>Get Started</strong>
+                <div id="container-stars">
+                    <div id="stars"></div>
+                </div>
+    
+                <div id="glow">
+                    <div class="circle"></div>
+                    <div class="circle"></div>
+                </div>
+            </button>
+
+        </a>
+
+    </div>
+
+    <div class="flex justify-center mt-16">
+        <p class="px-40 text-black text-4xl font-bold text-center">Modulation Types</p>
+    </div>
+
+    <div class="flex justify-evenly mt-8">
+        <div
+            class="w-32 h-32 bg-gradient-to-r from-gray-700 via-gray-900 to-black rounded-full flex items-center justify-center">
+            <div class="absolute top-0 w-full text-center">
+                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+                </svg>
+            </div>
+            <div class="text-white font-bold text-3xl">
+                BPSK
+            </div>
+        </div>
+
+        <div
+            class="w-32 h-32 bg-gradient-to-t from-gray-700 via-gray-900 to-black rounded-full flex items-center justify-center">
+            <div class="absolute top-0 w-full text-center">
+                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+                </svg>
+            </div>
+            <div class="text-white font-bold text-3xl">
+                QPSK
+            </div>
+        </div>
+
+        <div
+            class="w-32 h-32 bg-gradient-to-l from-gray-700 via-gray-900 to-black rounded-full flex items-center justify-center">
+            <div class="absolute top-0 w-full text-center">
+                <!-- Icon at the top center -->
+                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+                </svg>
+            </div>
+            <div class="text-white font-bold text-3xl">
+                8PSK
+            </div>
+        </div>
+    </div>
+
+    <div class="flex justify-center mt-16">
+        <p class="px-40 text-black text-4xl font-bold text-center mt-16">FEC Schemes</p>
+    </div>
+
+    <div class="flex justify-evenly m-8">
+        <div class="max-w-xs w-52 bg-[radial-gradient(ellipse_at_bottom,_var(--tw-gradient-stops))] from-gray-900 to-gray-600 bg-gradient-to-r shadow-lg rounded-lg overflow-hidden">
+            <div class="p-4">
+                <div class="flex items-center justify-center mb-4">
+                    <!-- Icon at the top center -->
+                    <img class="w-16 h-16" src="/static/coding.png" />
+                </div>
+                <div class="text-center">
+                    <!-- Icon name in the middle -->
+                    <p class="text-3xl font-semibold text-white">BCH</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="max-w-xs bg-[radial-gradient(ellipse_at_bottom,_var(--tw-gradient-stops))] from-gray-900 to-gray-600 bg-gradient-to-r w-52 shadow-lg rounded-lg overflow-hidden">
+            <div class="p-4">
+                <div class="flex items-center justify-center mb-4">
+                    <!-- Icon at the top center -->
+                    <img class="w-16 h-16" src="/static/coding23.png" />
+                </div>
+                <div class="text-center">
+                    <!-- Icon name in the middle -->
+                    <p class="text-3xl text-white font-semibold">Turbo</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="max-w-xs bg-[radial-gradient(ellipse_at_bottom,_var(--tw-gradient-stops))] from-gray-900 to-gray-600 bg-gradient-to-r w-72 shadow-lg rounded-lg overflow-hidden">
+            <div class="p-4">
+                <div class="flex items-center justify-center mb-4">
+                    <!-- Icon at the top center -->
+                    <img class="w-16 h-16" src="/static/convulational.png" />
+                </div>
+                <div class="text-center">
+                    <!-- Icon name in the middle -->
+                    <p class="text-3xl text-white font-semibold">Convolutional</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="max-w-xs bg-[radial-gradient(ellipse_at_bottom,_var(--tw-gradient-stops))] from-gray-900 to-gray-600 bg-gradient-to-r w-52 shadow-lg rounded-lg overflow-hidden">
+            <div class="p-4">
+                <div class="flex items-center justify-center mb-4">
+                    <!-- Icon at the top center -->
+                    <img class="w-16 h-16" src="/static/hamming.png" />
+                </div>
+                <div class="text-center">
+                    <!-- Icon name in the middle -->
+                    <p class="text-3xl text-white font-semibold">Hamming</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="max-w-xs bg-[radial-gradient(ellipse_at_bottom,_var(--tw-gradient-stops))] from-gray-900 to-gray-600 bg-gradient-to-r w-52 shadow-lg rounded-lg overflow-hidden">
+            <div class="p-4">
+                <div class="flex items-center justify-center mb-4">
+                    <!-- Icon at the top center -->
+                    <img class="h-16 w-16" src="/static/tpc.png">
+                </div>
+                <div class="text-center">
+                    <!-- Icon name in the middle -->
+                    <p class="text-3xl text-white font-semibold">TPC</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="text-gray-600 body-font">
+        <div class="container px-5 py-24 mx-auto">
+            <div class="flex flex-col text-center w-full mb-20">
+                <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">Our Team</h1>
+                <p class="lg:w-2/3 mx-auto leading-relaxed text-base font-bold">We are team MONOLITH finalists of SIH2023
+                </p>
+            </div>
+            <div class="flex flex-wrap -m-2">
+                <div class="p-2 lg:w-1/3 md:w-1/2 w-full">
+                    <div class="h-full flex items-center border-gray-200 border p-4 rounded-lg">
+                   
+                        <div class="flex-grow">
+                            <h2 class="text-gray-900 title-font font-bold">Yuvraj Singh (Team Leader)</h2>
+                            <p class="text-gray-500">Matlab | Simulink</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-2 lg:w-1/3 md:w-1/2 w-full">
+                    <div class="h-full flex items-center border-gray-200 border p-4 rounded-lg">
+                       
+                        <div class="flex-grow">
+                            <h2 class="text-gray-900 title-font font-bold">Vishwajeet Panda</h2>
+                            <p class="text-gray-500">Data Scienctist</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-2 lg:w-1/3 md:w-1/2 w-full">
+                    <div class="h-full flex items-center border-gray-200 border p-4 rounded-lg">
+                        
+                        <div class="flex-grow">
+                            <h2 class="text-gray-900 title-font font-bold">Utkarsh Pundeer</h2>
+                            <p class="text-gray-500">Front-End</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-2 lg:w-1/3 md:w-1/2 w-full">
+                    <div class="h-full flex items-center border-gray-200 border p-4 rounded-lg">
+                       
+                        <div class="flex-grow">
+                            <h2 class="text-gray-900 title-font font-bold">Anubhav Hooda</h2>
+                            <p class="text-gray-500">DevOps</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-2 lg:w-1/3 md:w-1/2 w-full">
+                    <div class="h-full flex items-center border-gray-200 border p-4 rounded-lg">
+                      
+                        <div class="flex-grow">
+                            <h2 class="text-gray-900 title-font font-bold">Aman Kumar</h2>
+                            <p class="text-gray-500">Front-End</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-2 lg:w-1/3 md:w-1/2 w-full">
+                    <div class="h-full flex items-center border-gray-200 border p-4 rounded-lg">
+                      
+                        <div class="flex-grow">
+                            <h2 class="text-gray-900 title-font font-bold">Namreen Habib</h2>
+                            <p class="text-gray-500">UI/UX</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>

@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FEC Decoder - Smart India Hackathon 2023</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <style>
+
+        ::-webkit-scrollbar {
+            width: .5rem;
+            height: .5rem;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(0,0,0,.15);
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(0,0,0,.3);
+        }
+
+        body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Arial', sans-serif;
+    }
+
+    main {
+      margin-left: 60px; /* Adjust according to your layout */
+      padding-top: 16px;
+      max-height: 100vh; /* Make sure it doesn't exceed the viewport height */
+      overflow: auto;
+      background-color: #f5f5f5; /* Light background color */
+    }
+
+    iframe {
+      display: block;
+      margin: 0 auto; /* Center the iframe */
+      border: 1px solid #ddd; /* Add a border for better visibility */
+      border-radius: 8px; /* Rounded corners */
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+    }
+
+        /* #submit_button {
+            padding: 0.8em 1.8em;
+            border: 2px solid #17C3B2;
+            position: relative;
+            overflow: hidden;
+            background-color: transparent;
+            text-align: center;
+            text-transform: uppercase;
+            font-size: 16px;
+            transition: .3s;
+            z-index: 1;
+            font-family: inherit;
+            color: #17C3B2;
+        }
+
+        #submit_button::before {
+            content: '';
+            width: 0;
+            height: 300%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(45deg);
+            background: #17C3B2;
+            transition: .5s ease;
+            display: block;
+            z-index: -1;
+        }
+
+        #submit_button:hover::before {
+            width: 105%;
+        }
+
+        #submit_button:hover {
+            color: #111;
+        } */
+    </style>
+</head>
+
+
+<body class="h-screen flex items-center justify-center">
+
+    <header class="fixed right-0 top-0 left-60 bg-yellow-50 py-3 px-4 h-16">
+        <div class="max-w-4xl mx-auto">
+          <div class="flex items-center justify-between">
+            <div>
+              <button type="button" class="flex items-center focus:outline-none rounded-lg text-gray-600 hover:text-yellow-600 focus:text-yellow-600 font-semibold p-2 border border-transparent hover:border-yellow-300 focus:border-yellow-300 transition">
+                <span class="inline-flex items-center justify-center w-6 h-6 text-gray-600 text-xs rounded bg-white transition mr-2">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
+                  </svg>
+                </span>
+                <!-- <span class="text-sm">Aave!</span>  -->
+              </button>
+            </div>
+            <div class="text-lg font-bold">History</div>
+            <div>
+              <button type="button" class="flex items-center focus:outline-none rounded-lg text-gray-600 hover:text-yellow-600 focus:text-yellow-600 font-semibold p-2 border border-transparent hover:border-yellow-300 focus:border-yellow-300 transition">
+                <span class="text-sm"></span>
+                <span class="inline-flex items-center justify-center w-6 h-6 text-gray-600 text-xs rounded bg-white transition ml-2">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+                  </svg>
+                </span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </header>
+    
+      <aside class="fixed inset-y-0 left-0 bg-white shadow-md max-h-screen w-60">
+        <div class="flex flex-col justify-between h-full">
+          <div class="flex-grow">
+            <div class="px-4 py-6 text-center border-b">
+              <h1 class="text-xl font-bold leading-none"><span class="text-yellow-700">Team Monolith!</span></h1>
+            </div>
+            <div class="p-4">
+              <ul class="space-y-1">
+                
+                <li>
+                  <a href="/process" class="flex bg-white hover:bg-yellow-50 rounded-xl font-bold text-sm text-gray-900 py-3 px-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="text-lg mr-4" viewBox="0 0 16 16">
+                      <path d="M4 .5a.5.5 0 0 0-1 0V1H2a2 2 0 0 0-2 2v1h16V3a2 2 0 0 0-2-2h-1V.5a.5.5 0 0 0-1 0V1H4V.5zM16 14V5H0v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2zm-3.5-7h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5z"/>
+                    </svg>Home
+                  </a>
+                </li>
+                <li>
+                  <a href="#" class="flex items-center bg-yellow-200 rounded-xl font-bold text-sm text-yellow-900 py-3 px-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="text-lg mr-4" viewBox="0 0 16 16">
+                      <path d="M12 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM5 4h6a.5.5 0 0 1 0 1H5a.5.5 0 0 1 0-1zm-.5 2.5A.5.5 0 0 1 5 6h6a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5zM5 8h6a.5.5 0 0 1 0 1H5a.5.5 0 0 1 0-1zm0 2h3a.5.5 0 0 1 0 1H5a.5.5 0 0 1 0-1z"/>
+                    </svg>History
+                  </a>
+                </li>
+                
+              </ul>
+            </div>
+          </div>
+          <div class="p-4">
+            <!-- <button type="button" class="inline-flex items-center justify-center h-9 px-4 rounded-xl bg-gray-900 text-gray-300 hover:text-white text-sm font-semibold transition">
+              <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="" viewBox="0 0 16 16">
+                <path d="M12 1a1 1 0 0 1 1 1v13h1.5a.5.5 0 0 1 0 1h-13a.5.5 0 0 1 0-1H3V2a1 1 0 0 1 1-1h8zm-2 9a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+              </svg>
+            </button>  -->
+            <!-- <span class="font-bold text-sm ml-2">Back to Main</span> -->
+          </div>
+        </div>
+      </aside>
+    
+      <main class="ml-60 pt-16 max-h-screen overflow-auto">
+        <p>
+          <iframe class="" src="/static/history.txt" width="100%" height="600" frameborder="0"></iframe>
+        </p>
+      </main>
+
+
+
+    <!-- <div class="bg-[url('/static/bg-space.jpg')] h-full w-full flex flex-col items-center justify-center"> -->
+
+        <!-- <img src="/static/bg-space.jpg" class="h-full w-full absolute" /> -->
+
+        <!-- <div class="grid grid-cols-2 gap-4">
+
+        </div> -->
+
+
+        <!-- <form method="post" action="/process" id="fecForm" enctype="multipart/form-data"
+            class="bg-white bg-opacity-20 rounded-lg shadow-md backdrop-filter backdrop-blur-md border border-white p-4 w-72 text-center">
+            <h2 class="text-white text-3xl p-2 font-bold">FEC Decoder</h2>
+            <label for="binaryInput" class="block mb-2 text-lg text-white">Upload file</label>
+            <input type="file" id="binaryInput" name="file" placeholder="Enter binary string..." required
+                class="w-full px-4 py-2 mb-4 border rounded-md text-sm text-gray-700" />
+            <label for="fecType" class="block mb-2 text-lg text-white">Select FEC Type:</label>
+            <select id="fecType" name="modulator_type"
+                class="w-full px-4 py-2 mb-4 border rounded-md text-sm text-gray-700">
+                <option selected="selected">--Select One--</option>
+                <option value="QPSK">QPSK</option>
+                <option value="BPSK">BPSK</option>
+                <option value="8PSK">8PSk</option>
+            </select>
+
+            <button type="submit" id="submit_button"
+                class="bg-blue-900 text-white px-5 py-2 border rounded-md cursor-pointer text-lg transition duration-300 hover:bg-blue-950">Submit</button>
+        </form> -->
+
+        <!-- <div class="flex justify-bottom items-end mt-10">
+            <h1 class="text-4xl font-serif text-white">{{value2}}</h1>
+            <h1 class="text-4xl font-serif text-white">{{value}}</h1>
+        </div>
+    </div> -->
+
+    <script type="text/javascript">
+
+        const urlParams = new URLSearchParams(window.location.search);
+
+
+        //const results = eval(recVal);
+
+        const jsonRes = urlParams.get('probab');
+
+        console.log(jsonRes);
+
+    </script>
+
+
+    <script>
+        function decodeFEC() {
+            var binaryString = document.getElementById("binaryInput").value;
+            var selectedFEC = document.getElementById("fecType").value;
+            var fecType;
+
+            // Use the selected FEC type if available, else use decoding logic
+            if (selectedFEC) {
+                fecType = "FEC Type " + selectedFEC;
+            } else {
+                // FEC decoding logic
+                if (binaryString.startsWith("1010")) {
+                    fecType = "FEC Type A";
+                } else if (binaryString.startsWith("1100")) {
+                    fecType = "FEC Type B";
+                } else {
+                    fecType = "Unknown FEC Type";
+                }
+            }
+
+            // Display the result
+            document.getElementById("result").innerHTML = "<p class='text-green-500'>FEC Type: " + fecType + "</p>";
+        }
+    </script>
+</body>
+
+</html>

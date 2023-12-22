@@ -1,0 +1,6 @@
+[FEC SCHEME]{CONFIDENCE RATIO OF EACH CLASS}
+
+
+['BCH']{'Convolutional': 0.0, 'TPC': 32.8, 'BCH': 50.1}
+
+['TPC']{'BCH': 11.6, 'Convolutional': 0.0, 'TPC': 99.9}

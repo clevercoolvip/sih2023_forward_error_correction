@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FEC Decoder - Smart India Hackathon 2023</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <style>
+
+        ::-webkit-scrollbar {
+            width: .5rem;
+            height: .5rem;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(0,0,0,.15);
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(0,0,0,.3);
+        }
+
+        /* #submit_button {
+            padding: 0.8em 1.8em;
+            border: 2px solid #17C3B2;
+            position: relative;
+            overflow: hidden;
+            background-color: transparent;
+            text-align: center;
+            text-transform: uppercase;
+            font-size: 16px;
+            transition: .3s;
+            z-index: 1;
+            font-family: inherit;
+            color: #17C3B2;
+        }
+
+        #submit_button::before {
+            content: '';
+            width: 0;
+            height: 300%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(45deg);
+            background: #17C3B2;
+            transition: .5s ease;
+            display: block;
+            z-index: -1;
+        }
+
+        #submit_button:hover::before {
+            width: 105%;
+        }
+
+        #submit_button:hover {
+            color: #111;
+        } */
+    </style>
+</head>
+
+
+<body class="h-screen flex items-center justify-center">
+
+    <header class="fixed right-0 top-0 left-60 bg-yellow-50 py-3 px-4 h-16">
+        <div class="max-w-4xl mx-auto">
+          <div class="flex items-center justify-between">
+            <div>
+              <button type="button" class="flex items-center focus:outline-none rounded-lg text-gray-600 hover:text-yellow-600 focus:text-yellow-600 font-semibold p-2 border border-transparent hover:border-yellow-300 focus:border-yellow-300 transition">
+                <span class="inline-flex items-center justify-center w-6 h-6 text-gray-600 text-xs rounded bg-white transition mr-2">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
+                  </svg>
+                </span>
+                <!-- <span class="text-sm">Aave!</span>  -->
+              </button>
+            </div>
+            <div class="text-lg font-bold">Home</div>
+            <div>
+              <button type="button" class="flex items-center focus:outline-none rounded-lg text-gray-600 hover:text-yellow-600 focus:text-yellow-600 font-semibold p-2 border border-transparent hover:border-yellow-300 focus:border-yellow-300 transition">
+                <span class="text-sm"></span>
+                <span class="inline-flex items-center justify-center w-6 h-6 text-gray-600 text-xs rounded bg-white transition ml-2">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+                  </svg>
+                </span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </header>
+    
+      <aside class="fixed inset-y-0 left-0 bg-white shadow-md max-h-screen w-60">
+        <div class="flex flex-col justify-between h-full">
+          <div class="flex-grow">
+            <div class="px-4 py-6 text-center border-b">
+              <h1 class="text-xl font-bold leading-none"><span class="text-yellow-700">Team Monolith!</span></h1>
+            </div>
+            <div class="p-4">
+              <ul class="space-y-1">
+                <li>
+                  <a href="/process" class="flex items-center bg-yellow-200 rounded-xl font-bold text-sm text-yellow-900 py-3 px-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="text-lg mr-4" viewBox="0 0 16 16">
+                      <path d="M4 .5a.5.5 0 0 0-1 0V1H2a2 2 0 0 0-2 2v1h16V3a2 2 0 0 0-2-2h-1V.5a.5.5 0 0 0-1 0V1H4V.5zM16 14V5H0v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2zm-3.5-7h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5z"/>
+                    </svg>Home
+                  </a>
+                </li>
+                <li>
+                  <a href="/history" class="flex bg-white hover:bg-yellow-50 rounded-xl font-bold text-sm text-gray-900 py-3 px-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="text-lg mr-4" viewBox="0 0 16 16">
+                      <path d="M12 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM5 4h6a.5.5 0 0 1 0 1H5a.5.5 0 0 1 0-1zm-.5 2.5A.5.5 0 0 1 5 6h6a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5zM5 8h6a.5.5 0 0 1 0 1H5a.5.5 0 0 1 0-1zm0 2h3a.5.5 0 0 1 0 1H5a.5.5 0 0 1 0-1z"/>
+                    </svg>History
+                  </a>
+                </li>
+                
+              </ul>
+            </div>
+          </div>
+          <div class="p-4">
+            <!-- <button type="button" class="inline-flex items-center justify-center h-9 px-4 rounded-xl bg-gray-900 text-gray-300 hover:text-white text-sm font-semibold transition">
+              <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="" viewBox="0 0 16 16">
+                <path d="M12 1a1 1 0 0 1 1 1v13h1.5a.5.5 0 0 1 0 1h-13a.5.5 0 0 1 0-1H3V2a1 1 0 0 1 1-1h8zm-2 9a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+              </svg>
+            </button>  -->
+            <!-- <span class="font-bold text-sm ml-2">Back to Main</span> -->
+          </div>
+        </div>
+      </aside>
+    
+      <main class="ml-60 pt-16 max-h-screen overflow-auto">
+        <div class="px-6 py-8">
+          <div class="max-w-4xl mx-auto flex flex-col">
+            <div class="bg-white rounded-3xl p-8 mb-5 flex grid-cols-2 ">
+                <form class="col-span-1" method="post" action="/process" id="fecForm" enctype="multipart/form-data">
+                    <h1 class="text-3xl font-bold mb-10">Upload your input Signals!</h1>
+                    <div class="grid grid-cols-1 gap-x-40">
+                        <div class="items-stretch py-2">
+                            <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="file_input" type="file" id="binaryInput" name="file" placeholder="Enter binary string..." required />
+                        </div>
+                        <div class="items-stretch py-2">
+                            <select id="fecType" name="modulator_type"
+                                class="w-full px-4 py-2 mb-4 border rounded-md text-sm text-gray-700">
+                                <option selected="selected">--Select One--</option>
+                                <option value="QPSK">QPSK</option>
+                                <option value="BPSK">BPSK</option>
+                                <option value="8PSK">8PSk</option>
+                            </select>
+                        </div>
+                        <div class="items-center gap-x-2 py-2">
+                        
+                            <button id="submit_button" type="submit" class="inline-flex items-center justify-center h-9 px-5 rounded-xl bg-gray-900 text-gray-300 hover:text-white text-sm font-semibold transition">
+                                Submit
+                            </button>
+                            <!-- <p><iframe class="" src="/static/history.txt" width=200 height=400 frameborder=0 ></iframe></p> -->
+                        </div>
+                    </div>
+                </form>
+    
+              <hr class="mx-10">
+    
+              <div class="col-span-1">
+                {% if value != Null %}
+                <div>
+                  <h2 class="text-2xl font-bold mb-4">Results</h2>
+    
+                  <div class="grid grid-cols-2 gap-4">
+                    <div class="col-span-2">
+                      <div class="p-4 bg-green-100 rounded-xl">
+                        <div class="font-bold text-xl text-gray-800 leading-none">Highest Probability,<br></div>
+                        <div class="mt-5">
+                          <button id="highest_prob" type="button" class="inline-flex items-center justify-center py-2 px-3 rounded-xl bg-white text-gray-800 hover:text-green-500 text-sm font-semibold transition">
+                            {{value}}
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                    {% for key, val in value2.items() %}
+                            <div class="p-4 bg-yellow-100 rounded-xl text-gray-800">
+                                <div class="font-bold text-2xl leading-none">{{key}}</div>
+                                <div class="mt-2">{{val}}</div>
+                            </div>
+                            <!-- <h1>Key: {{key}}</h1>
+                            <h2>Value: {{value}}</h2> -->
+                    {% endfor %}
+                    
+                  </div>
+                </div>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+          {% if value != Null %}
+          <div class="px-6 py-8">
+            
+            <div class="max-w-sm w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6">
+                <div class="flex justify-between pb-4 mb-4 border-b border-gray-200 dark:border-gray-700">
+                <div class="flex items-center">
+                    <div class="w-12 h-12 rounded-lg bg-gray-100 dark:bg-gray-700 flex items-center justify-center me-3">
+                    <svg class="w-6 h-6 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 19">
+                        <path d="M14.5 0A3.987 3.987 0 0 0 11 2.1a4.977 4.977 0 0 1 3.9 5.858A3.989 3.989 0 0 0 14.5 0ZM9 13h2a4 4 0 0 1 4 4v2H5v-2a4 4 0 0 1 4-4Z"/>
+                        <path d="M5 19h10v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2ZM5 7a5.008 5.008 0 0 1 4-4.9 3.988 3.988 0 1 0-3.9 5.859A4.974 4.974 0 0 1 5 7Zm5 3a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm5-1h-.424a5.016 5.016 0 0 1-1.942 2.232A6.007 6.007 0 0 1 17 17h2a1 1 0 0 0 1-1v-2a5.006 5.006 0 0 0-5-5ZM5.424 9H5a5.006 5.006 0 0 0-5 5v2a1 1 0 0 0 1 1h2a6.007 6.007 0 0 1 4.366-5.768A5.016 5.016 0 0 1 5.424 9Z"/>
+                    </svg>
+                    </div>
+                    <div>
+                    <h5 class="leading-none text-2xl font-bold text-gray-900 dark:text-white pb-1">FEC Probability</h5>
+                    <p class="text-sm font-normal text-gray-500 dark:text-gray-400"></p>
+                    </div>
+                </div>
+                <div>
+                    
+                </div>
+                </div>
+            
+                <!-- <div class="grid grid-cols-2">
+                <dl class="flex items-center">
+                    <dt class="text-gray-500 dark:text-gray-400 text-sm font-normal me-1">Money spent:</dt>
+                    <dd class="text-gray-900 text-sm dark:text-white font-semibold">$3,232</dd>
+                </dl>
+                <dl class="flex items-center justify-end">
+                    <dt class="text-gray-500 dark:text-gray-400 text-sm font-normal me-1">Conversion rate:</dt>
+                    <dd class="text-gray-900 text-sm dark:text-white font-semibold">1.2%</dd>
+                </dl>
+                </div> -->
+            
+                <div id="column-chart"></div>
+                <div class="grid grid-cols-1 items-center border-gray-200 border-t dark:border-gray-700 justify-between">
+                    <div class="flex justify-between items-center pt-5">
+                    <!-- Button -->
+                    <button
+                        style="display: none;"
+                        id="dropdownDefaultButton"
+                        data-dropdown-toggle="lastDaysdropdown"
+                        data-dropdown-placement="bottom"
+                        class="text-sm font-medium text-gray-500 dark:text-gray-400 hover:text-gray-900 text-center inline-flex items-center dark:hover:text-white"
+                        type="button">
+                        Last 7 days
+                        <svg class="w-2.5 m-2.5 ms-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+                        </svg>
+                    </button>
+                    <!-- Dropdown menu -->
+                    <div id="lastDaysdropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+                        <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
+                            <li>
+                            <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Yesterday</a>
+                            </li>
+                            <li>
+                            <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Today</a>
+                            </li>
+                            <li>
+                            <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Last 7 days</a>
+                            </li>
+                            <li>
+                            <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Last 30 days</a>
+                            </li>
+                            <li>
+                            <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Last 90 days</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <a
+                        href="/history"
+                        class="uppercase text-sm font-semibold inline-flex items-center rounded-lg text-blue-600 hover:text-blue-700 dark:hover:text-blue-500  hover:bg-gray-100 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700 px-3 py-2">
+                        Previous Reports
+                        <svg class="w-2.5 h-2.5 ms-1.5 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
+                        </svg>
+                    </a>
+                    </div>
+                </div>
+            </div>
+            
+            <script>
+                {% if value != Null %}
+                const resData = '{{value2|tojson|safe}}';
+                {% endif %}
+                const dat = JSON.parse(resData);
+                console.log(dat)
+
+                const data = [];
+
+                for (let key in dat) {
+                    if (dat.hasOwnProperty(key)) {
+                        console.log(key + ": " + dat[key]);
+                        data.push({x: key, y: dat[key]})
+                    }
+                }
+
+                // ApexCharts options and config
+                window.addEventListener("load", function() {
+                const options = {
+                        colors: ["#1A56DB", "#FDBA8C"],
+                        series: [
+                        {
+                            name: "Organic",
+                            color: "#1A56DB",
+                            data: data,
+                        },
+                        
+                        ],
+                        chart: {
+                        type: "bar",
+                        height: "320px",
+                        fontFamily: "Inter, sans-serif",
+                        toolbar: {
+                            show: false,
+                        },
+                        },
+                        plotOptions: {
+                        bar: {
+                            horizontal: false,
+                            columnWidth: "70%",
+                            borderRadiusApplication: "end",
+                            borderRadius: 8,
+                        },
+                        },
+                        tooltip: {
+                        shared: true,
+                        intersect: false,
+                        style: {
+                            fontFamily: "Inter, sans-serif",
+                        },
+                        },
+                        states: {
+                        hover: {
+                            filter: {
+                            type: "darken",
+                            value: 1,
+                            },
+                        },
+                        },
+                        stroke: {
+                        show: true,
+                        width: 0,
+                        colors: ["transparent"],
+                        },
+                        grid: {
+                        show: false,
+                        strokeDashArray: 4,
+                        padding: {
+                            left: 2,
+                            right: 2,
+                            top: -14
+                        },
+                        },
+                        dataLabels: {
+                        enabled: false,
+                        },
+                        legend: {
+                        show: false,
+                        },
+                        xaxis: {
+                        floating: false,
+                        labels: {
+                            show: true,
+                            style: {
+                            fontFamily: "Inter, sans-serif",
+                            cssClass: 'text-xs font-normal fill-gray-500 dark:fill-gray-400'
+                            }
+                        },
+                        axisBorder: {
+                            show: false,
+                        },
+                        axisTicks: {
+                            show: false,
+                        },
+                        },
+                        yaxis: {
+                        show: false,
+                        },
+                        fill: {
+                        opacity: 1,
+                        },
+                    }
+            
+                    if(document.getElementById("column-chart") && typeof ApexCharts !== 'undefined') {
+                        const chart = new ApexCharts(document.getElementById("column-chart"), options);
+                        chart.render();
+                    }
+                });
+            </script>
+            
+          </div>
+          {% endif %}
+        </div>
+      </main>
+
+
+
+    <!-- <div class="bg-[url('/static/bg-space.jpg')] h-full w-full flex flex-col items-center justify-center"> -->
+
+        <!-- <img src="/static/bg-space.jpg" class="h-full w-full absolute" /> -->
+
+        <!-- <div class="grid grid-cols-2 gap-4">
+
+        </div> -->
+
+
+        <!-- <form method="post" action="/process" id="fecForm" enctype="multipart/form-data"
+            class="bg-white bg-opacity-20 rounded-lg shadow-md backdrop-filter backdrop-blur-md border border-white p-4 w-72 text-center">
+            <h2 class="text-white text-3xl p-2 font-bold">FEC Decoder</h2>
+            <label for="binaryInput" class="block mb-2 text-lg text-white">Upload file</label>
+            <input type="file" id="binaryInput" name="file" placeholder="Enter binary string..." required
+                class="w-full px-4 py-2 mb-4 border rounded-md text-sm text-gray-700" />
+            <label for="fecType" class="block mb-2 text-lg text-white">Select FEC Type:</label>
+            <select id="fecType" name="modulator_type"
+                class="w-full px-4 py-2 mb-4 border rounded-md text-sm text-gray-700">
+                <option selected="selected">--Select One--</option>
+                <option value="QPSK">QPSK</option>
+                <option value="BPSK">BPSK</option>
+                <option value="8PSK">8PSk</option>
+            </select>
+
+            <button type="submit" id="submit_button"
+                class="bg-blue-900 text-white px-5 py-2 border rounded-md cursor-pointer text-lg transition duration-300 hover:bg-blue-950">Submit</button>
+        </form> -->
+
+        <!-- <div class="flex justify-bottom items-end mt-10">
+            <h1 class="text-4xl font-serif text-white">{{value2}}</h1>
+            <h1 class="text-4xl font-serif text-white">{{value}}</h1>
+        </div>
+    </div> -->
+
+    <script type="text/javascript">
+
+        const urlParams = new URLSearchParams(window.location.search);
+
+
+        //const results = eval(recVal);
+
+        const jsonRes = urlParams.get('probab');
+
+        console.log(jsonRes);
+
+    </script>
+
+
+    <script>
+        function decodeFEC() {
+            var binaryString = document.getElementById("binaryInput").value;
+            var selectedFEC = document.getElementById("fecType").value;
+            var fecType;
+
+            // Use the selected FEC type if available, else use decoding logic
+            if (selectedFEC) {
+                fecType = "FEC Type " + selectedFEC;
+            } else {
+                // FEC decoding logic
+                if (binaryString.startsWith("1010")) {
+                    fecType = "FEC Type A";
+                } else if (binaryString.startsWith("1100")) {
+                    fecType = "FEC Type B";
+                } else {
+                    fecType = "Unknown FEC Type";
+                }
+            }
+
+            // Display the result
+            document.getElementById("result").innerHTML = "<p class='text-green-500'>FEC Type: " + fecType + "</p>";
+        }
+    </script>
+</body>
+
+</html>
